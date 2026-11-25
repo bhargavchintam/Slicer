@@ -1,0 +1,24 @@
+diff -ru a/Common/DataModel/vtkCartesianGrid.cxx b/Common/DataModel/vtkCartesianGrid.cxx
+--- a/Common/DataModel/vtkCartesianGrid.cxx	2026-11-25 05:08:16.334268964 +0000
++++ b/Common/DataModel/vtkCartesianGrid.cxx	2026-11-25 05:08:16.354055859 +0000
+@@ -261,7 +261,7 @@
+ //------------------------------------------------------------------------------
+ vtkConstantArray<int>* vtkCartesianGrid::GetCellTypesArray()
+ {
+-  if (!this->LegacyStructuredCellTypes)
++  if (!this->LegacyStructuredCellTypes && this->StructuredCellTypes)
+   {
+     this->LegacyStructuredCellTypes = vtkSmartPointer<vtkConstantArray<int>>::New();
+     this->LegacyStructuredCellTypes->ConstructBackend(
+diff -ru a/Common/DataModel/vtkStructuredGrid.cxx b/Common/DataModel/vtkStructuredGrid.cxx
+--- a/Common/DataModel/vtkStructuredGrid.cxx	2026-11-25 05:08:16.335940356 +0000
++++ b/Common/DataModel/vtkStructuredGrid.cxx	2026-11-25 05:08:16.370919430 +0000
+@@ -261,7 +261,7 @@
+ //------------------------------------------------------------------------------
+ vtkConstantArray<int>* vtkStructuredGrid::GetCellTypesArray()
+ {
+-  if (!this->LegacyStructuredCellTypes)
++  if (!this->LegacyStructuredCellTypes && this->StructuredCellTypes)
+   {
+     this->LegacyStructuredCellTypes = vtkSmartPointer<vtkConstantArray<int>>::New();
+     this->LegacyStructuredCellTypes->ConstructBackend(
