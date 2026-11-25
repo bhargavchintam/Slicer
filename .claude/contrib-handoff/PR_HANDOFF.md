@@ -94,7 +94,7 @@ ctest.
 - The bug dates from commit 334cccf19b (2019-08-02), so released versions (5.12.x) are affected.
   This might be a candidate for the stable branch.
 
-This change was prepared with AI assistance (Claude Code). I reviewed and verified it before
+I used Claude as my AI assistant for this change. I reviewed and verified it before
 submitting.
 ````
 
@@ -170,7 +170,7 @@ I considered rewriting the RUNPATH to `$ORIGIN` (and `$ORIGIN/../lib/Slicer-X.Y`
 libraries also load without the launcher. I didn't do that here because the rest of the Linux package
 relies on the launcher environment. It would be a behavior change worth discussing on its own.
 
-This change was prepared with AI assistance (Claude Code). I reviewed and verified it before
+I used Claude as my AI assistant for this change. I reviewed and verified it before
 submitting.
 ````
 

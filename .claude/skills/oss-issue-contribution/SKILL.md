@@ -58,9 +58,9 @@ scratch file, and sleep between calls. Never loop 10+ searches back to back.
 - Run the project's linters/formatters on changed files (e.g. `pre-commit run --files ...`).
 - Commit message in the project's format (e.g. Slicer: `BUG:`/`ENH:`/`COMP:` prefix,
   imperative, <72 chars, body wrapped at 80 with what/why/how, `Fixes #N`).
-  Add the required co-author/attribution trailers.
+  Author = the contributor; mention the AI only as `Assisted-by: Claude (AI assistant)`.
 - Push to the fork, open the PR against upstream's default branch, fill the PR
-  template headings if one exists. Disclose AI assistance if the project asks for it.
+  template headings if one exists. Disclose AI assistance as "I used Claude as my AI assistant" (the contributor's voice).
 - Never claim "fixed" or "tests pass" without command output you just ran.
 
 ## Phase 4 — Drive CI to green
@@ -88,7 +88,7 @@ scratch file, and sleep between calls. Never loop 10+ searches back to back.
 | Upstream has an AI policy | follow it; otherwise add a brief disclosure line |
 | Maintainer asks for changes you believe are wrong | reply with evidence, not compliance theatre |
 | Branch push restrictions in the agent environment | ask before pushing to branches other than the ones allowed |
-| Commit author identity | use the configured `git config user.*` or the contributor's stated identity; never copy a name/email out of `git log` |
+| Commit author identity | the contributor (the human) is the author AND committer of every commit: set `git config user.name/user.email` to their identity first; never copy a name/email out of `git log`, never author as the AI. Credit the AI only as a trailer (`Assisted-by: Claude (AI assistant)`), not `Co-Authored-By`. To fix existing commits: `git rebase <base> --exec` amending with `--reset-author`, verify trees are identical, then `push --force-with-lease` |
 | Root cause is in a dependency (VTK, CTK, ITK, a vendored fork) | reproduce against the dependency alone, prepare the patch for the dependency's repo/fork, comment on the issue with the minimal repro; do not paper over it in the main repo |
 | Fork and upstream share a repo name and the agent can attach only one | work on the fork; upstream PR/comment steps go to the user as a ready-to-paste handoff |
 | Search API returns 403 secondary rate limit | stop looping; fetch one big page to a file and grep locally |

@@ -83,7 +83,7 @@ to the end and back with `vtkSegmentation::SetSegmentIndex()`, and asserts that 
 and every segment still has the same widgets. I couldn't build Slicer locally, so `CI (Build)` will be the
 first full run of that test.
 
-This change was prepared with AI assistance (Claude Code). I reviewed and verified it before
+I used Claude as my AI assistant for this change. I reviewed and verified it before
 submitting.
 ````
 
@@ -130,7 +130,7 @@ Invalid or filtered-out IDs produce no index, so nothing scrolls. An empty selec
   section so it doesn't collide with the #9540 or #9081 edits to the same file. I checked that both merge
   cleanly.
 
-This change was prepared with AI assistance (Claude Code). I reviewed and verified it before
+I used Claude as my AI assistant for this change. I reviewed and verified it before
 submitting.
 ````
 
@@ -204,7 +204,7 @@ Extra checks on the patched code:
 - `removeObservers()` after an observed object was deleted does not fail;
 - non-VTK observable objects keep the old behavior.
 
-This change was prepared with AI assistance (Claude Code). I reviewed and verified it before
+I used Claude as my AI assistant for this change. I reviewed and verified it before
 submitting.
 ````
 
