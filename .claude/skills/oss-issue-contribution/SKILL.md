@@ -23,6 +23,7 @@ Hard filters. Drop the issue if ANY is true:
 | Open or draft PR references it | list open PRs once (`is:pr is:open`, per_page=100), grep titles+bodies for the number AND for key symbols (function / file names) |
 | Recently closed PR already fixed it | `is:pr is:closed <number>` and `is:pr <symbol>` |
 | Someone said "I'm working on this" | read the issue comments (web page if the API is blocked) |
+| A related open PR touches the same function/file | search open PRs by key symbols too; fetch its head with `git fetch upstream pull/<N>/head:pr-<N>` and diff only the author's commits; read its review comments (a diagnosis of your bug may live there; credit it) |
 | Needs a maintainer decision not yet made (policy, API break, design) | comments/labels; pick only the non-controversial slice, say so |
 | Cannot be verified in your environment at all | e.g. needs proprietary hardware, a 6-hour superbuild with no shortcut |
 
@@ -46,6 +47,10 @@ scratch file, and sleep between calls. Never loop 10+ searches back to back.
 4. Fix minimally in the project's style. Add/extend a regression test in the
    project's existing test framework, mirroring a neighbouring test.
 5. Show the test fails before the fix and passes after (TDD). Keep the output.
+6. When a harness check fails for BOTH the old and new code, suspect the harness first
+   (missing event-loop settling, wrong precondition) and isolate it with a minimal control.
+7. Stress the fix beyond the reported case (random permutations, both supported
+   toolchain/library major versions) when the fix is about ordering, lifetimes or concurrency.
 
 ## Phase 3 — Local checks, then PR
 
@@ -87,6 +92,9 @@ scratch file, and sleep between calls. Never loop 10+ searches back to back.
 | Root cause is in a dependency (VTK, CTK, ITK, a vendored fork) | reproduce against the dependency alone, prepare the patch for the dependency's repo/fork, comment on the issue with the minimal repro; do not paper over it in the main repo |
 | Fork and upstream share a repo name and the agent can attach only one | work on the fork; upstream PR/comment steps go to the user as a ready-to-paste handoff |
 | Search API returns 403 secondary rate limit | stop looping; fetch one big page to a file and grep locally |
+| Shallow clone makes `merge-base` / PR diffs huge | diff only the PR author's commits (`git log --author`), or `git fetch --deepen` |
+| Two of your PRs edit the same test file | put each test in its own section/function so they merge independently; verify with a three-way merge |
+| A force-push is refused by the environment | add a follow-up commit instead and offer to squash in the PR body |
 
 ## Red flags — stop
 
